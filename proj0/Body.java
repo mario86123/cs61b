@@ -25,4 +25,10 @@ public class Body {
 	double r = calcDistance(other);
 	return (g * mass * other.mass / r / r);
     }
+    public double calcForceExertedByX(Body other) {
+	return calcForceExertedBy(other) * (other.xxPos - xxPos) / calcDistance(other);
+    }
+    public double calcForceExertedByY(Body other) {
+        return calcForceExertedBy(other) * (other.yyPos - yyPos) / calcDistance(other);
+    }
 }
