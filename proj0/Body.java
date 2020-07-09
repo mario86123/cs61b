@@ -1,6 +1,7 @@
 public class Body {
     public double xxPos, yyPos, xxVel, yyVel, mass;
     public String imgFileName;
+    public static final double g = 6.67e-11;
     public Body(double xP, double yP, double xV, double yV, double m, String img) {
 	xxPos = xP;
 	yyPos = yP;
@@ -21,7 +22,6 @@ public class Body {
 	return Math.sqrt((xxPos - other.xxPos) * (xxPos - other.xxPos) + (yyPos - other.yyPos) * (yyPos - other.yyPos));
     }
     public double calcForceExertedBy(Body other) {
-	double g = 6.67e-11;
 	double r = calcDistance(other);
 	return (g * mass * other.mass / r / r);
     }
