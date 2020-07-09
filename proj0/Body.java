@@ -17,4 +17,7 @@ public class Body {
 	mass = b.mass;
 	imgFileName = b.imgFileName;
     }
+    public double calcDistance(Body other) {
+	return Math.sqrt((xxPos - other.xxPos) * (xxPos - other.xxPos) + (yyPos - other.yyPos) * (yyPos - other.yyPos));
+    }
 }
