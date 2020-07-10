@@ -28,14 +28,32 @@ public class NBody {
 		String filename = args[2];
 		double rad = readRadius(filename);
 		Body[] arr = readBodies(filename);
-		//StdDraw.enableDoubleBuffering();
+		StdDraw.enableDoubleBuffering();
 		StdDraw.setScale(-rad, rad);
 		StdDraw.clear();
-		StdDraw.picture(0, 0, "images/starfield.jpg");
-		for (int k = 0; k < arr.length; k += 1) {
-			arr[k].draw();
+		for (int time = 0; time < T; time += dt) {
+			double[] xForces = new double[arr.length];
+			double[] yForces = new double[arr.length];
+			for (int k = 0; k < arr.length; k += 1) {
+				xForces[k] = arr[k].calcNetForceExertedByX(arr);
+				yForces[k] = arr[k].calcNetForceExertedByY(arr);
+			}
+			for (int k = 0; k < arr.length; k += 1) {
+        	                arr[k].update(dt, xForces[k], yForces[k]);
+               		 }
+			StdDraw.picture(0, 0, "images/starfield.jpg");
+			for (int k = 0; k < arr.length; k += 1) {
+				arr[k].draw();
+			}
+			StdDraw.show();
+        	        StdDraw.pause(10);
 		}
-		StdDraw.show();
-                //StdDraw.pause(2000);
+		StdOut.printf("%d\n", arr.length);
+		StdOut.printf("%.2e\n", rad);
+		for (int i = 0; i < arr.length; i++) {
+    			StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",
+               				arr[i].xxPos, arr[i].yyPos, arr[i].xxVel,
+                  			arr[i].yyVel, arr[i].mass, arr[i].imgFileName);   
+		}
 	}
 }
