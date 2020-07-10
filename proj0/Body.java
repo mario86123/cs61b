@@ -31,4 +31,24 @@ public class Body {
     public double calcForceExertedByY(Body other) {
         return calcForceExertedBy(other) * (other.yyPos - yyPos) / calcDistance(other);
     }
+    public double calcNetForceExertedByX(Body[] all) {
+	double total = 0;
+	for (int i = 0; i < all.length; i++) {
+	    if (all[i].equals(this)) {
+		continue;
+	    }
+	    total += calcForceExertedByX(all[i]);
+	}
+	return total;
+    }
+    public double calcNetForceExertedByY(Body[] all) {
+        double total = 0;
+        for (int i = 0; i < all.length; i++) {
+            if (all[i].equals(this)) {
+                continue;
+            }
+            total += calcForceExertedByY(all[i]);
+        }
+        return total;
+    }
 }
