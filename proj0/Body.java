@@ -59,4 +59,7 @@ public class Body {
 	xxPos += xxVel * time;
 	yyPos += yyVel * time;
     }
+    public void draw() {
+	StdDraw.picture(xxPos, yyPos, imgFileName);
+    }
 }
