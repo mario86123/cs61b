@@ -51,4 +51,12 @@ public class Body {
         }
         return total;
     }
+    public void update(double time, double forceX, double forceY) {
+	double aX = forceX / mass;
+	double aY = forceY / mass;
+	xxVel += aX * time;
+	yyVel += aY * time;
+	xxPos += xxVel * time;
+	yyPos += yyVel * time;
+    }
 }
