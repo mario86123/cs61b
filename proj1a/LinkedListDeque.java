@@ -99,10 +99,11 @@ public class LinkedListDeque<T> {
         }
         return ptr.item;
     }
+    /** not finish yet. */
     public T getRecursive(int index) {
         if (index == 0) {
             return sentinel.next.item;
         }
-        return get(index - 1);
+        return getRecursive(index - 1);
     }
 }
