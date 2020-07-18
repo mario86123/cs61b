@@ -22,7 +22,7 @@ public class LinkedListDeque<T> {
         size = 0;
     }
     /** Creates a deep copy of other. */
-    public LinkedListDeque(LinkedListDeque other){
+    public LinkedListDeque(LinkedListDeque<T> other){
         sentinel = new Node();
         size = 0;
         Node ptr = other.sentinel.next;
