@@ -76,7 +76,7 @@ public class ArrayDeque<T> {
         arr[plusOne(nextFirst)] = null;
         nextFirst = plusOne(nextFirst);
         size -= 1;
-        if ((float) size / arr.length > 0.25) {
+        if ((float) size / arr.length < 0.25) {
             resize(arr.length / 2);
         }
         return tmp;
@@ -103,18 +103,26 @@ public class ArrayDeque<T> {
 //    public static void main(String[] args) {
 //        System.out.println("Running tests.\n");
 //        ArrayDeque<Integer> a1 = new ArrayDeque<>();
-//        a1.addLast(0);
-//        a1.addLast(1);
-//        a1.removeLast();//      ==> 1
+//        a1.addFirst(0);
+//        a1.addFirst(1);
+//        a1.removeLast();     // ==> 0
 //        a1.addLast(3);
-//        a1.addLast(4);
-//        a1.addLast(5);
-//        a1.removeLast();//      ==> 5
-//        a1.isEmpty();
+//        a1.removeLast();      //==> 3
+//        a1.addFirst(5);
+//        System.out.println(a1.get(1));     //==> 1
+//        a1.removeLast() ; //    ==> 1
 //        a1.addLast(8);
-//        a1.addLast(9);
-//        a1.addLast(10);
-//        a1.removeLast();
+//        a1.addFirst(9);
+//        a1.get(1);   //   ==> 5
+//        a1.get(1);    //  ==> 5
+//        a1.addFirst(12);
+//        a1.get(3);    //  ==> 8
+//        a1.addLast(14);
+//        a1.addLast(15);
+//        a1.removeLast();//      ==> 15
+//        a1.get(3);      //==> 8
+//        a1.removeFirst(); //    ==> 12
+//        a1.removeFirst();
 //        a1.printDeque();
 //    }
 }
