@@ -76,7 +76,7 @@ public class ArrayDeque<T> {
         arr[plusOne(nextFirst)] = null;
         nextFirst = plusOne(nextFirst);
         size -= 1;
-        if ((float) size / arr.length < 0.25) {
+        if ((float) size / arr.length < 0.25 && arr.length > 4) {
             resize(arr.length / 2);
         }
         return tmp;
@@ -90,7 +90,7 @@ public class ArrayDeque<T> {
         arr[minusOne(nextLast)] = null;
         nextLast = minusOne(nextLast);
         size -= 1;
-        if ((float) size / arr.length < 0.25) {
+        if ((float) size / arr.length < 0.25 && arr.length > 4) {
             resize(arr.length / 2);
         }
         return tmp;
@@ -103,26 +103,29 @@ public class ArrayDeque<T> {
 //    public static void main(String[] args) {
 //        System.out.println("Running tests.\n");
 //        ArrayDeque<Integer> a1 = new ArrayDeque<>();
-//        a1.addFirst(0);
-//        a1.addFirst(1);
-//        a1.removeLast();     // ==> 0
-//        a1.addLast(3);
-//        a1.removeLast();      //==> 3
-//        a1.addFirst(5);
-//        System.out.println(a1.get(1));     //==> 1
-//        a1.removeLast() ; //    ==> 1
-//        a1.addLast(8);
-//        a1.addFirst(9);
-//        a1.get(1);   //   ==> 5
-//        a1.get(1);    //  ==> 5
-//        a1.addFirst(12);
-//        a1.get(3);    //  ==> 8
-//        a1.addLast(14);
-//        a1.addLast(15);
-//        a1.removeLast();//      ==> 15
-//        a1.get(3);      //==> 8
-//        a1.removeFirst(); //    ==> 12
-//        a1.removeFirst();
-//        a1.printDeque();
+//        a1.addLast(0);
+//        System.out.println(a1.removeLast());//      ==> 0
+//        a1.addLast(2);
+//        a1.addFirst(3);
+//        a1.addFirst(4);
+//        System.out.println(a1.get(0));//      ==> 4
+//        a1.addLast(6);
+//        System.out.println(a1.removeFirst());//     ==> 4
+//        System.out.println(a1.removeFirst());//     ==> 3
+//        a1.addLast(9);
+//        a1.removeFirst();//     ==> 2
+//        a1.addFirst(11);
+//        System.out.println(a1.removeFirst());//     ==> 11
+//        a1.addFirst(13);
+//        System.out.println(a1.get(0));//      ==> 13
+//        System.out.println(a1.get(2));//      ==> 9
+//        System.out.println(a1.removeLast());//      ==> 9
+//        System.out.println(a1.removeFirst());//     ==> 13
+//        System.out.println(a1.removeLast());//      ==> 6
+//        a1.addFirst(19);
+//        System.out.println(a1.removeLast());//      ==> 19
+//        a1.addLast(21);
+//        System.out.println(a1.removeLast());   //   ==> 21
+//        a1.addFirst(23);
 //    }
 }
