@@ -90,7 +90,7 @@ public class ArrayDeque<T> {
         arr[minusOne(nextLast)] = null;
         nextLast = minusOne(nextLast);
         size -= 1;
-        if ((float) size / arr.length > 0.25) {
+        if ((float) size / arr.length < 0.25) {
             resize(arr.length / 2);
         }
         return tmp;
@@ -100,4 +100,21 @@ public class ArrayDeque<T> {
     public T get(int index) {
         return arr[(index + nextFirst + 1) % arr.length];
     }
+//    public static void main(String[] args) {
+//        System.out.println("Running tests.\n");
+//        ArrayDeque<Integer> a1 = new ArrayDeque<>();
+//        a1.addLast(0);
+//        a1.addLast(1);
+//        a1.removeLast();//      ==> 1
+//        a1.addLast(3);
+//        a1.addLast(4);
+//        a1.addLast(5);
+//        a1.removeLast();//      ==> 5
+//        a1.isEmpty();
+//        a1.addLast(8);
+//        a1.addLast(9);
+//        a1.addLast(10);
+//        a1.removeLast();
+//        a1.printDeque();
+//    }
 }
