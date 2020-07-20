@@ -11,15 +11,15 @@ public class ArrayDeque<T> {
         nextFirst = 0;
         nextLast = 1;
     }
-    public ArrayDeque(ArrayDeque<T> other) {
-        size = other.size;
-        arr = (T []) new Object[other.arr.length];
-        for (int i = 0; i < arr.length; i += 1) {
-            arr[i] = other.arr[i];
-        }
-        nextFirst = other.nextFirst;
-        nextLast = other.nextLast;
-    }
+//    public ArrayDeque(ArrayDeque<T> other) {
+//        size = other.size;
+//        arr = (T []) new Object[other.arr.length];
+//        for (int i = 0; i < arr.length; i += 1) {
+//            arr[i] = other.arr[i];
+//        }
+//        nextFirst = other.nextFirst;
+//        nextLast = other.nextLast;
+//    }
     private int plusOne(int x) {
         return (x + 1) % arr.length;
     }
