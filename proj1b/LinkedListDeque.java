@@ -1,4 +1,4 @@
-public class LinkedListDeque<T> implements Deque<Item>{
+public class LinkedListDeque<T> implements Deque<T>{
     private Node sentinel;
     private int size;
     private class Node {
@@ -32,14 +32,12 @@ public class LinkedListDeque<T> implements Deque<Item>{
 //        }
 //    }
     /** Adds an item of type T to the front of the deque. */
-    @override
     public void addFirst(T item) {
         sentinel.next = new Node(item, sentinel, sentinel.next);
         sentinel.next.next.prev = sentinel.next;
         size += 1;
     }
     /** Adds an item of type T to the back of the deque. */
-    @override
     public void addLast(T item) {
         sentinel.prev = new Node(item, sentinel.prev, sentinel);
         sentinel.prev.prev.next = sentinel.prev;
@@ -66,7 +64,6 @@ public class LinkedListDeque<T> implements Deque<Item>{
         System.out.println();
     }
     /** Removes and returns the item at the front of the deque. If no such item exists, returns null. */
-    @override
     public T removeFirst() {
         if (size == 0) {
             return null;
@@ -78,7 +75,6 @@ public class LinkedListDeque<T> implements Deque<Item>{
         return tmp;
     }
     /** Removes and returns the item at the back of the deque. If no such item exists, returns null. */
-    @override
     public T removeLast() {
         if (size == 0) {
             return null;
@@ -91,7 +87,6 @@ public class LinkedListDeque<T> implements Deque<Item>{
     }
     /** Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
      *  If no such item exists, returns null. Must not alter the deque! */
-    @override
     public T get(int index) {
         int i = 0;
         Node ptr = sentinel.next;

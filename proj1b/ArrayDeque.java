@@ -1,5 +1,5 @@
 /** Array based list. */
-public class ArrayDeque<T> implements Deque<Item>{
+public class ArrayDeque<T> implements Deque<T>{
     private T[] arr;
     private int size;
     private int nextFirst;
@@ -36,7 +36,6 @@ public class ArrayDeque<T> implements Deque<Item>{
         nextLast = size;
     }
     /** Adds an item of type T to the front of the deque. */
-    @override
     public void addFirst(T item) {
         if (size == arr.length) {
             resize(size * 2);
@@ -46,7 +45,6 @@ public class ArrayDeque<T> implements Deque<Item>{
         size += 1;
     }
     /** Adds an item of type T to the back of the deque. */
-    @override
     public void addLast(T item) {
         if (size == arr.length) {
             resize(arr.length * 2);
@@ -70,7 +68,6 @@ public class ArrayDeque<T> implements Deque<Item>{
         System.out.println();
     }
     /** Removes and returns the item at the front of the deque. If no such item exists, returns null. */
-    @override
     public T removeFirst() {
         if (size == 0) {
             return null;
@@ -85,7 +82,6 @@ public class ArrayDeque<T> implements Deque<Item>{
         return tmp;
     }
     /** Removes and returns the item at the back of the deque. If no such item exists, returns null. */
-    @override
     public T removeLast() {
         if (size == 0) {
             return null;
@@ -101,7 +97,6 @@ public class ArrayDeque<T> implements Deque<Item>{
     }
     /** Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
      *  If no such item exists, returns null. Must not alter the deque! */
-    @override
     public T get(int index) {
         return arr[(index + nextFirst + 1) % arr.length];
     }
