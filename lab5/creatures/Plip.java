@@ -123,6 +123,7 @@ public class Plip extends Creature {
     public Action chooseAction(Map<Direction, Occupant> neighbors) {
         // Rule 1
         Deque<Direction> emptyNeighbors = new ArrayDeque<>();
+        Deque<Direction> clorusNeighbors = new ArrayDeque<>();
         boolean anyClorus = false;
         // TODO
         // (Google: Enhanced for-loop over keys of NEIGHBORS?)
@@ -131,18 +132,22 @@ public class Plip extends Creature {
             if (entry.getValue().name() == "empty") {
                 emptyNeighbors.addFirst(entry.getKey());
             }
+            if (entry.getValue().name() == "clorus") {
+                clorusNeighbors.addFirst(entry.getKey());
+            }
         }
         if (emptyNeighbors.size() == 0) { // FIXME
             return new Action(Action.ActionType.STAY); // TODO
         }
-
         // Rule 2
         // HINT: randomEntry(emptyNeighbors)
         if (energy >= 1) {
-            return new Action(Action.ActionType.REPLICATE);
+            return new Action(Action.ActionType.REPLICATE, randomEntry(emptyNeighbors));
         }
         // Rule 3
-
+        if (clorusNeighbors.size() != 0 && Math.random() < 0.5) {
+            return new Action(Action.ActionType.MOVE, randomEntry(emptyNeighbors));
+        }
         // Rule 4
         return new Action(Action.ActionType.STAY);
     }

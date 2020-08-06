@@ -6,8 +6,12 @@ import huglife.Direction;
 import huglife.Occupant;
 
 import java.awt.*;
+import java.util.ArrayDeque;
 import java.util.Collection;
+import java.util.Deque;
 import java.util.Map;
+
+import static huglife.HugLifeUtils.randomEntry;
 
 public class Clorus extends Creature {
 
@@ -48,7 +52,29 @@ public class Clorus extends Creature {
     }
 
     public Action chooseAction(Map<Direction, Occupant> neighbors){
-
+        // Rule 1
+        Deque<Direction> emptyNeighbors = new ArrayDeque<>();
+        Deque<Direction> plipNeighbors = new ArrayDeque<>();
+        // (Google: Enhanced for-loop over keys of NEIGHBORS?)
+        // for () {...}
+        for (Map.Entry<Direction, Occupant> entry : neighbors.entrySet()) {
+            if (entry.getValue().name() == "empty") {
+                emptyNeighbors.addFirst(entry.getKey());
+            }
+            if (entry.getValue().name() == "plip") {
+                plipNeighbors.addFirst(entry.getKey());
+            }
+        }
+        if (emptyNeighbors.size() == 0) {
+            return new Action(Action.ActionType.STAY);
+        }
+        if (plipNeighbors.size() != 0) {
+            return new Action(Action.ActionType.ATTACK, randomEntry(plipNeighbors));
+        }
+        if (energy >= 1) {
+            return new Action(Action.ActionType.REPLICATE, randomEntry(emptyNeighbors));
+        }
+        return new Action(Action.ActionType.MOVE, randomEntry(emptyNeighbors));
     }
 
 }
