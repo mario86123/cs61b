@@ -139,7 +139,7 @@ public class Plip extends Creature {
         // Rule 2
         // HINT: randomEntry(emptyNeighbors)
         if (energy >= 1) {
-            return new Action(Action.ActionType.REPLICATE, randomEntry(emptyNeighbors));
+            return new Action(Action.ActionType.REPLICATE);
         }
         // Rule 3
 
