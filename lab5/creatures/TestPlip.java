@@ -41,7 +41,8 @@ public class TestPlip {
         p1 = new Plip(0.5);
         p2 = p1.replicate();
         assertEquals(0.25, p1.energy(), 0.01);
-        assertEquals(0.25, p1.energy(), 0.01);
+        assertEquals(0.25, p2.energy(), 0.01);
+        assertNotEquals(p1, p2);
     }
 
     @Test
