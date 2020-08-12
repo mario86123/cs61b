@@ -8,7 +8,7 @@ public class GuitarString {
     private static final double DECAY = .996; // energy decay factor
 
     /* Buffer for storing sound data. */
-    private BoundedQueue<Double> buffer;
+    private ArrayRingBuffer<Double> buffer;
 
     /* Create a guitar string of the given frequency.  */
     public GuitarString(double frequency) {
@@ -16,6 +16,11 @@ public class GuitarString {
         //       cast the result of this division operation into an int. For
         //       better accuracy, use the Math.round() function before casting.
         //       Your buffer should be initially filled with zeros.
+        double capacity = SR / frequency;
+        buffer  = new ArrayRingBuffer(Math.round((float)capacity));
+        for (int i = 0; i < buffer.capacity(); i += 1) {
+            buffer.enqueue(0.0);
+        }
     }
 
 
@@ -27,6 +32,10 @@ public class GuitarString {
         //
         //       Make sure that your random numbers are different from each
         //       other.
+        for (int i = 0; i < buffer.capacity(); i += 1) {
+            buffer.dequeue();
+            buffer.enqueue(Math.random() - 0.5);
+        }
     }
 
     /* Advance the simulation one time step by performing one iteration of
@@ -36,12 +45,15 @@ public class GuitarString {
         // TODO: Dequeue the front sample and enqueue a new sample that is
         //       the average of the two multiplied by the DECAY factor.
         //       Do not call StdAudio.play().
+        double n1 = buffer.dequeue();
+        double n2 = buffer.peek();
+        buffer.enqueue((n1 + n2) / 2 * DECAY);
     }
 
     /* Return the double at the front of the buffer. */
     public double sample() {
         // TODO: Return the correct thing.
-        return 0;
+        return buffer.peek();
     }
 }
     // TODO: Remove all comments that say TODO when you're done.
