@@ -246,4 +246,34 @@ public class BST<Key extends Comparable<Key>> {
     private boolean isEmpty() {
         return size() == 0;
     }
+
+//    public int depth() {
+//        return depth(root);
+//    }
+//
+//    private int depth(Node r) {
+//        if (r == null) { return 0; }
+//        else if (r.left == null && r.right == null) { return 0; }
+//        return Math.max(depth(r.left), depth(r.right)) + 1;
+//    }
+
+    private int IPL() {
+        return IPL(root, 0);
+    }
+
+    private int IPL(Node r, int depth) {
+        if (r == null) { return 0; }
+        else if (r.left == null && r.right == null) { return 0; }
+        else if (r.left == null) {
+            return IPL(r.right, depth + 1) + depth + 1;
+        } else if (r.right == null) {
+            return IPL(r.left, depth + 1) + depth + 1;
+        } else {
+            return IPL(r.left, depth + 1) + IPL(r.right, depth + 1) + 2 * (depth + 1);
+        }
+    }
+
+    public double averageDepth() {
+        return (double)IPL() / size();
+    }
 }
