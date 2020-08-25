@@ -36,13 +36,57 @@ public class Experiments {
     }
 
     public static void experiment2() {
+        Random r = new Random();
+        List<Double> yValues = new ArrayList<>();
+        List<Integer> xValues = new ArrayList<>();
+        BST<Integer> tree = new BST<>();
+        for (int i = 0; i < 5000; i += 1) {
+            tree.add(r.nextInt());
+        }
+        for (int x = 0; x < 100; x += 1) {
+            for (int i = 0; i < 10; i += 1){
+                tree.deleteTakingSuccessor(tree.getRandomKey());
+                tree.add(r.nextInt());
+            }
+            double thisY = tree.averageDepth();
+            xValues.add(x);
+            yValues.add(thisY);
+        }
+
+        XYChart chart = new XYChartBuilder().width(800).height(600).xAxisTitle("number of items (asymmetric deletion)").yAxisTitle("y label").build();
+        chart.addSeries("the average depth of your BST", xValues, yValues);
+
+        new SwingWrapper(chart).displayChart();
     }
 
     public static void experiment3() {
+        Random r = new Random();
+        List<Double> yValues = new ArrayList<>();
+        List<Integer> xValues = new ArrayList<>();
+        BST<Integer> tree = new BST<>();
+        for (int i = 0; i < 5000; i += 1) {
+            tree.add(r.nextInt());
+        }
+        for (int x = 0; x < 100; x += 1) {
+            for (int i = 0; i < 100; i += 1){
+                tree.deleteTakingRandom(tree.getRandomKey());
+                tree.add(r.nextInt());
+            }
+            double thisY = tree.averageDepth();
+            xValues.add(x);
+            yValues.add(thisY);
+        }
+
+        XYChart chart = new XYChartBuilder().width(800).height(600).xAxisTitle("number of items (symmetric deletion)").yAxisTitle("y label").build();
+        chart.addSeries("the average depth of your BST", xValues, yValues);
+
+        new SwingWrapper(chart).displayChart();
     }
 
     public static void main(String[] args) {
-        experiment1();
+//        experiment1();
+        experiment2();
+        experiment3();
         return;
     }
 }
