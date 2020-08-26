@@ -25,8 +25,10 @@ public class MyHashMap<K, V> implements Map61B<K, V>{
     /** Removes all of the mappings from this map. */
     @Override
     public void clear() {
-        map.clear();
-        keysWithValue = null;
+        int initialSize = map.size();
+        map = new ArrayList<>();
+        map.addAll(Collections.nCopies (initialSize, null));
+        keysWithValue = new HashSet<>();
     }
 
     /** Returns true if this map contains a mapping for the specified key. */
@@ -59,18 +61,16 @@ public class MyHashMap<K, V> implements Map61B<K, V>{
      */
     @Override
     public void put(K key, V value) {
+        if ((double)(keysWithValue.size() + 1) / map.size() > lf) {
+            MyHashMap tmp = new MyHashMap(map.size() * 2);
+            for (K item : keysWithValue) {
+                tmp.put(item, get(item));
+            }
+            this.map = tmp.map;
+        }
         keysWithValue.add(key);
         map.set(hash(key), value);
-        if ((double)keysWithValue.size() / map.size() > lf) {
-            MyHashMap tmp = new MyHashMap(map.size());
-            Iterator<K> it = keysWithValue.iterator();
-            while(it.hasNext()) {
-                tmp.put(it.next(), map.get(hash(key)));
-            }
-        }
     }
-
-
 
     /** Returns a Set view of the keys contained in this map. */
     @Override
